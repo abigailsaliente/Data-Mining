@@ -14,18 +14,20 @@ View(GraduatesfromSUC_dplyr)
 
 -------------------
 
+
 #No.2
-#Base
+#BASE
 Extract_HighSchoolGrade_base <- SW1_DATA[, c("CourseCode", "eng", "mat", "sci")] 
 FilterColumns_HighSchoolGrade_base <- SW1_DATA[, c("CourseCode", "eng", "mat", "sci")]
-View(FilterColumns_HighSchoolGrade_base)
 FilterGrades_HighSchoolGrade_base <- FilterColumns_HighSchoolGrade_base[FilterColumns_HighSchoolGrade_base$eng > 97 & FilterColumns_HighSchoolGrade_base$mat >97 & FilterColumns_HighSchoolGrade_base$sci > 97,] 
 View(FilterGrades_HighSchoolGrade_base)
 
-#Dplyr
+#DPLYR
+library(dplyr)
 HighSchoolGrade <- SW1_DATA %>% select(CourseCode, eng, mat, sci) %>% rename("Course Code" = CourseCode, "English" = eng, "Mathematics" = mat, "Science" = sci)%>%
   filter(SW1_DATA$eng > 97 & SW1_DATA$mat >97 & SW1_DATA$sci > 97,)
 View(HighSchoolGrade)
+
 
 
 -----------------
