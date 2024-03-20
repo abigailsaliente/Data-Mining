@@ -1,7 +1,9 @@
+
 View(SW1_DATA)
 str(SW1_DATA)
 dim(SW1_DATA)
 
+----------------------
 #No.1
 #Base
 GraduatesfromSUC <- SW1_DATA[SW1_DATA$"CourseCode" == "BSA" & SW1_DATA$"schooltype" == "suc" & SW1_DATA$"average" >= 98, ]
@@ -12,9 +14,7 @@ GraduatesfromSUC_dplyr <- SW1_DATA %>% filter(CourseCode == "BSA", schooltype ==
                                               average >=98)
 View(GraduatesfromSUC_dplyr)
 
--------------------
-
-
+----------------------
 #No.2
 #BASE
 Extract_HighSchoolGrade_base <- SW1_DATA[, c("CourseCode", "eng", "mat", "sci")] 
@@ -28,17 +28,26 @@ HighSchoolGrade <- SW1_DATA %>% select(CourseCode, eng, mat, sci) %>% rename("Co
   filter(SW1_DATA$eng > 97 & SW1_DATA$mat >97 & SW1_DATA$sci > 97,)
 View(HighSchoolGrade)
 
-
-
------------------
+------------------
 #No.3
-#BASE
-EntranceScore <- rowSums(SW1_DATA[c("Language", "GenInfo", "Science", "Numerical", "NonVerbal")])
-EntranceScoreArrange_base <- SW1_DATA[order(-EntranceScore), ]
-EntranceScoreArrange_base <- EntranceScoreArrange_base[, -ncol(EntranceScoreArrange_base)]
-View(EntranceScoreArrange_base)
+#Base
+EntranceScoreArrange <- SW1_DATA[order(SW1_DATA$Language + SW1_DATA$GenInfo + SW1_DATA$Science +  SW1_DATA$Numerical + SW1_DATA$NonVerbal, decreasing = TRUE),]
+View(EntranceScoreArrange)
 
-#DPLYR
+#Dplyr
 EntranceScoreArrange_dyplr <- SW1_DATA %>% mutate(Entrance = Language + GenInfo + Science + Numerical + NonVerbal) %>% arrange(desc(Entrance))
 View(EntranceScoreArrange_dyplr)
+
+----------------
+
+#No.4
+#Base
+SummaryResultsEntrance1 <- SW1_DATA %>% group_by(Gender) %>% summarise(mean_entrance = mean(EntranceScore), sd_entrance = sd(EntranceScore))
+View(SummaryResultsEntrance1)
+
+#Dplyr
+SummaryResultsEntrance_dplyr <- SW1_DATA %>% group_by(Gender) %>% summarise(mean_entrance = mean(EntranceScore), sd_entrance = sd(EntranceScore))
+View(SummaryResultsEntrance_dplyr)
+
+
 
