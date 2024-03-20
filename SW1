@@ -20,10 +20,9 @@ student_scores <- HighSchoolGrade %>% filter(English > 97 & Mathematics > 97 & S
 View(student_scores)
 
 #Dplyr
-HighSchoolGrade_dplyr<-SW1_DATA%>% select(CourseCode,eng,mat,sci)%>%rename("CourseCode"=CourseCode,"English"=eng,"Mathematics"=mat,"Science"=sci)
-View(HighSchoolGrade_dplyr)
-Student_Scores <- HighSchoolGrade_dplyr %>% filter(English > 97 & Mathematics > 97 & Science > 97)
-View(Student_Scores)
+HighSchoolGrade <- SW1_DATA %>% select(CourseCode, eng, mat, sci) %>% rename("Course Code" = CourseCode, "English" = eng, "Mathematics" = mat, "Science" = sci)%>%
+  filter(SW1_DATA$eng > 97 & SW1_DATA$mat >97 & SW1_DATA$sci > 97,)
+View(HighSchoolGrade)
 
 
 -----------------
