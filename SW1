@@ -1,4 +1,3 @@
-
 View(SW1_DATA)
 str(SW1_DATA)
 dim(SW1_DATA)
