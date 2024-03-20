@@ -32,16 +32,13 @@ View(HighSchoolGrade)
 
 -----------------
 #No.3
-#Base
-SW1_DATA$Entrance <- rowSums(SW1_DATA[c("Language", "GenInfo", "Science", "Numerical", "NonVerbal")])
-EntranceScoreArrange_base <- SW1_DATA[order(-SW1_DATA$Entrance), ]
-EntranceScoreArrange_base <- EntranceScoreArrange[, -ncol(EntranceScoreArrange_base)]
+#BASE
+EntranceScore <- rowSums(SW1_DATA[c("Language", "GenInfo", "Science", "Numerical", "NonVerbal")])
+EntranceScoreArrange_base <- SW1_DATA[order(-EntranceScore), ]
+EntranceScoreArrange_base <- EntranceScoreArrange_base[, -ncol(EntranceScoreArrange_base)]
 View(EntranceScoreArrange_base)
 
-EntraceScoreArrange <- SW1_DATA [order(SW1_DATA$Language & SW1_DATA$GenInfo & SW1_DATA$Science & SW1_DATA$Numerical & SW1_DATA$NonVerbal), decreasing = T]
-View(EntraceScoreArrange)
-
-#Dplyr
-library(dplyr)
+#DPLYR
 EntranceScoreArrange_dyplr <- SW1_DATA %>% mutate(Entrance = Language + GenInfo + Science + Numerical + NonVerbal) %>% arrange(desc(Entrance))
 View(EntranceScoreArrange_dyplr)
+
