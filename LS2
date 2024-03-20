@@ -1,0 +1,193 @@
+# Load the mtcars dataset
+View(mtcars)
+str(mtcars)
+dim(mtcars)
+head(mtcars, 10)
+
+
+#Basic R Data Manipulation (Base R):
+# Basic R - Filtering using base package
+# Filter cars with more than 150 horsepower
+high_hp_cars<- mtcars[mtcars$hp>150,]
+View(high_hp_cars)
+
+
+# Basic R - Selecting columns using base package
+# Selecting columns: mpg, hp, and wt
+selected_columns<- mtcars[,c("mpg", "hp", "wt")]
+View(selected_columns)
+
+
+
+
+# Basic R - Filtering rows and Selecting columns using base package
+# Filter cars with engine V-shape and selecting columns: wt, vs, and gear
+rowscolumns<- mtcars[mtcars$vs==0,c("wt", "vs", "gear")]
+View(rowscolumns)
+
+
+# Basic R - Sorting the dataset on a specific column using base package
+#Arrange the mtcars data in descending order based on the horsepower of the cars.
+mtrcars_sorted<- mtcars[order(mtcars$hp, decreasing = TRUE),]
+View(mtrcars_sorted)
+#increasing tanggalin lang yung comma
+
+mtrcars_sorted1<- mtcars[order(mtcars$hp),]
+
+
+
+#Basic R Data Manipulation (dplyr package):
+#Install and load the package needed.
+library(dplyr)
+high_hp_cars_dplyr<- mtcars %>% filter(hp>150)
+View(high_hp_cars_dplyr)
+
+
+
+# Basic R - Filtering using dplyr package
+# Filter cars with more than 150 horsepower
+
+
+
+
+# Basic R - Selecting columns using dplyr package
+# Selecting columns: mpg, hp, and wt
+selected_columns_dplyr<- select(mtcars,mpg, hp, wt)
+View(selected_columns_dplyr)
+
+
+
+# Basic R - Filtering rows and Selecting columns using dplyr package
+# Filter cars with more than 150 horsepower and selecting columns: wt, vs, and gear
+rowscolums_dplyr <- mtcars %>% filter(hp >150) %>%  select(wt, vs, gear)
+View(rowscolums_dplyr)
+
+
+
+# Basic R - Filtering rows and Selecting columns using dplyr package
+# Filter cars with more than 150 horsepower and 
+#with engine V-shape, also selecting columns: wt, vs, and gear
+rowscolumns_dplyr <- mtcars %>% filter(hp > 150 & vs==0) %>% select(wt, vs, gear)
+View(rowscolumns_dplyr)
+
+
+
+# Basic R - Filtering rows and Selecting columns using dplyr package
+# Filter cars with more than 150 horsepower and 
+#with engine V-shape, also selecting columns: mpg, cyl, disp, hp,drat and wt
+rowscolumns_dplyr2 <- mtcars %>% filter(hp > 150 & vs==0) %>% select(-c(qsec:carb))
+View(rowscolumns_dplyr2)
+
+
+
+#alternative way
+rowscolumns_dplyr2 <- mtcars %>% filter(hp > 150 & vs==0) %>% select(mpg:wt)
+View(rowscolumns_dplyr2)
+
+
+
+# Basic data manipulation using dplyr package
+#Arrange the mtcars data in ascending order based on the horsepower of the cars
+#and rename the variables "wt", and "am" to "weight" and "transmission", respectively.
+#ascending by default 
+mtcars_rename_dplyr<- mtcars %>% arrange(hp) %>% rename(weight=wt, transmission= am)
+View(mtcars_rename_dplyr)
+
+#descending
+mtcars_rename_dplyr1<- mtcars %>% arrange(desc(hp)) %>% rename(weight=wt, transmission= am)
+View(mtcars_rename_dplyr1)
+
+
+# Create a new column calculating miles per gallon (mpg) to kilometers per liter (kmpl)
+mtcars_mutate<- mtcars %>% mutate(kmpl=mpg*2)
+View(mtcars_mutate)
+
+
+
+# Grouping data and calculating summary statistics (mean, median, and 
+#standard deviation of miles per gallon by type of transmission)
+mtcars_summary_dplyr<- mtcars %>% group_by(am) %>% 
+  summarise(sample_mean=mean(mpg),
+  sample_median=median(mpg),
+  sample_sd=sd(mpg))
+View(mtcars_summary_dplyr)
+
+
+
+#Data Visualization
+#Install and load the package needed.
+
+
+
+
+
+# Scatter plot using base R plot function
+
+
+
+
+
+# Scatter plot using ggplot2
+
+
+
+
+# Scatter plot using plotly
+
+ 
+
+
+
+# Histogram using base R plot function
+
+
+
+
+# Histogram using ggplot2
+
+
+
+
+
+# Histogram using plotly
+
+
+
+
+
+# Bar graph using base R plot function
+
+
+
+
+
+# Bar graph using ggplot2
+
+
+
+
+# Bar graph using plotly
+
+
+
+
+
+# Box plot using base R plot function
+
+
+
+
+# Box plot using ggplot2
+
+
+
+
+
+# Box plot using plotly
+
+
+
+
+
+
+
