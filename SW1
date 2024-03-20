@@ -1,0 +1,49 @@
+
+View(SW1_DATA)
+str(SW1_DATA)
+dim(SW1_DATA)
+
+#No.1
+#Base
+GraduatesfromSUC <- SW1_DATA[SW1_DATA$"CourseCode" == "BSA" & SW1_DATA$"schooltype" == "suc" & SW1_DATA$"average" >= 98, ]
+View(GraduatesfromSUC)
+
+#Dplyr
+GraduatesfromSUC_dplyr <- SW1_DATA %>% filter(CourseCode == "BSA", schooltype == "suc",
+                                              average >=98)
+View(GraduatesfromSUC_dplyr)
+
+-------------------
+
+
+
+#No.2
+#Base
+student_scores <- HighSchoolGrade %>% filter(English > 97 & Mathematics > 97 & Science > 97)
+View(student_scores)
+
+#Dplyr
+HighSchoolGrade <- SW1_DATA %>%  select(CourseCode, eng, mat, sci) %>% rename("Course Code" = CourseCode, "English" = eng, "Mathematics" = mat, "Science" = sci)
+View(HighSchoolGrade)
+
+
+HighSchoolGrade <- SW1_DATA %>% select(CourseCode, eng, mat, sci) %>% rename("Course Code" = CourseCode, "English" = eng, "Mathematics" = mat, "Science" = sci)%>%
+  filter(SW1_DATA$eng > 97 & SW1_DATA$mat >97 & SW1_DATA$sci > 97,)
+View(HighSchoolGrade)
+
+
+-----------------
+#No.3
+#Base
+SW1_DATA$Entrance <- rowSums(SW1_DATA[c("Language", "GenInfo", "Science", "Numerical", "NonVerbal")])
+EntranceScoreArrange_base <- SW1_DATA[order(-SW1_DATA$Entrance), ]
+EntranceScoreArrange_base <- EntranceScoreArrange[, -ncol(EntranceScoreArrange_base)]
+View(EntranceScoreArrange_base)
+
+EntraceScoreArrange <- SW1_DATA [order(SW1_DATA$Language & SW1_DATA$GenInfo & SW1_DATA$Science & SW1_DATA$Numerical & SW1_DATA$NonVerbal), decreasing = T]
+View(EntraceScoreArrange)
+
+#Dplyr
+library(dplyr)
+EntranceScoreArrange_dyplr <- SW1_DATA %>% mutate(Entrance = Language + GenInfo + Science + Numerical + NonVerbal) %>% arrange(desc(Entrance))
+View(EntranceScoreArrange_dyplr)
