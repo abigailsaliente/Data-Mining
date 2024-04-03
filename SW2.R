@@ -1,8 +1,8 @@
 
-# Abigail Saliente
 #SW No. 2
 #No.5
 # Create boxplot using ggplot2 package
+library(ggplot2)
 ggplot(SW1_DATA, aes(x = schooltype, y = average)) +
   geom_boxplot(color = "black", fill = "pink") +
   labs(x = "Type of School", y = "High School Average Grade",
@@ -10,6 +10,7 @@ ggplot(SW1_DATA, aes(x = schooltype, y = average)) +
 
 #No.6
 # Create scatterplot using plotly package
+library(plotly)
 plot_ly(SW1_DATA, x = ~average, y = ~EntranceScore, type = "scatter",
         mode = "markers") %>%
   layout(xaxis = list(title = "Type of School"),
