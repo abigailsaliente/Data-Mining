@@ -1,0 +1,53 @@
+# Import Dataset
+# Set seed for reproducibility
+set.seed(42)
+
+# Simulate random samples for reported cases
+reported_cases <- sample(50:500, 50, replace = TRUE)  # range from 50 to 500 cases
+
+# Define the regions
+regions <- c("NCR", "Region I", "Region II", "Region III", "Region IV-A", "Region IV-B", "Region V", 
+             "Region VI", "Region VII", "Region VIII", "Region IX", "Region X", "Region XI", 
+             "Region XII", "CAR", "CARAGA", "ARMM")
+
+# Simulate random samples for regions
+affected_regions <- sample(regions, 50, replace = TRUE)
+
+# Create a data frame to hold the simulated data
+dengue_data <- data.frame(
+  Reported_Cases = reported_cases,
+  Affected_Regions = affected_regions
+)
+
+# Identify the region with the most cases
+max_region <- names(sort(table(dengue_data$Affected_Regions), decreasing = TRUE)[1])
+
+# Print the first few rows of the simulated data
+cat("Simulated Dengue Data:\n")
+head(dengue_data)
+
+# Print the region with the most cases
+cat("\nRegion with the Most Dengue Cases:\n")
+cat(max_region, "\n")
+
+
+
+Output:
+Simulated Dengue Data:
+> head(dengue_data)
+  Reported_Cases Affected_Regions
+1             98        Region II
+2            370             ARMM
+3            202      Region IV-B
+4            123      Region IV-B
+5            277         Region I
+6            195        Region II
+
+
+> # Print the region with the most cases
+> cat("\nRegion with the Most Dengue Cases:\n")
+
+Region with the Most Dengue Cases:
+> cat(max_region, "\n")
+Region IV-A 
+> 
