@@ -1,0 +1,68 @@
+# STEP 1: Data Preparation 
+# Install package
+install.packages("ISLR")
+
+# Load dataset
+data <- ISLR::Default
+
+# View Summary of Dataset
+summary(data)
+nrow(data)
+
+# Create Two-Way contigency table of categorical outcome and predictors 
+# to make sure there are not 0 cells
+table(data$default, data$student)
+xtabs(~default + student, data=data)
+
+
+# Training and Testing Set
+install.packages("tidymodels")
+library(tidymodels)
+
+split <- initial_split(data, prop =.7)
+train <- training(split)
+test <- testing(split)
+
+
+# fit logistic regression model
+
+model1 <- glm(default~as.factor(student)+balance+income,
+              family="binomial", data=train)
+
+# disable scientific notation for model summary
+options(scipen = 999)
+
+summary(model1)
+
+--------------
+Call:
+glm(formula = default ~ as.factor(student) + balance + income, 
+    family = "binomial", data = train)
+
+Coefficients:
+                           Estimate
+(Intercept)           -10.632813841
+as.factor(student)Yes  -0.736176921
+balance                 0.005750819
+income                 -0.000003808
+                         Std. Error z value
+(Intercept)             0.573097799 -18.553
+as.factor(student)Yes   0.279008529  -2.639
+balance                 0.000275392  20.882
+income                  0.000009735  -0.391
+                                  Pr(>|z|)    
+(Intercept)           < 0.0000000000000002 ***
+as.factor(student)Yes              0.00833 ** 
+balance               < 0.0000000000000002 ***
+income                             0.69571    
+---
+Signif. codes:  
+0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2077.4  on 6999  degrees of freedom
+Residual deviance: 1110.6  on 6996  degrees of freedom
+AIC: 1118.6
+
+Number of Fisher Scoring iterations: 8
